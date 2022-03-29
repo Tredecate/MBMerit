@@ -1,0 +1,15 @@
+{
+  "name": "mbmerit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "gcp-metadata": "^4.3.1"
+  }
+}
