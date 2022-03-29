@@ -6,10 +6,10 @@ const Discord = require("discord.js");
 
 //// DEFINE AND BEGIN BOT INITIALIZATION ////
 
-
+//const client = new Client();
 const CLIENTS = {};
 
-function defineBots() {
+async function defineBots() {
 
     const CONFIG = JSON.parse(readFileSync(resolve(__dirname, "./config.json"), "utf8"));
 
@@ -45,6 +45,22 @@ async function startBots() {
 
         await bot.client.login(await getToken(bot.config.name));
 
+        const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+        const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+        bot.client.commands = new Discord.Collection();
+
+        //event initialization
+        for (const file of events) {
+            const eventName = file.split(".")[0];
+            const event = require(`./events/${file}`);
+            bot.client.on(eventName, event.bind(null, client));
+        }
+        //command initialization
+        for (const file of commands) {
+            const commandName = file.split(".")[0];
+            const command = require(`./commands/${file}`);
+            bot.client.commands.set(commandName, command);
+        }
     }
 
     clientSpecificEvents();
@@ -54,7 +70,7 @@ async function startBots() {
 
 //// CLIENT SPECIFIC EVENT TRIGGERS ////
 
-
+/*
 function clientSpecificEvents() {
 
     // Establish *e eval listener. This is an archaic mess, pls no hate. The rest of the code isn't like this I promise
@@ -89,7 +105,7 @@ function clientSpecificEvents() {
     });
 
 }
-
+*/
 
 //// HELPER FUNCTIONS ////
 
@@ -104,7 +120,7 @@ async function getToken(botName) {
 
         } catch {
 
-            console.err(`Couldn't fetch bot token from VM metadata using name: ${botName}DiscordBotToken`);
+            console.log(`Couldn't fetch bot token from VM metadata using name: ${botName}DiscordBotToken`);
 
         }
 
@@ -118,11 +134,9 @@ async function getToken(botName) {
 
     } catch {
 
-        console.err(`Unable to read token for ${botName} from file: tokens.json`);
+        console.log(`Unable to read token for ${botName} from file: tokens.json`);
 
     }
-
-    return;
 
 }
 
@@ -145,3 +159,4 @@ startBots();
 
 Object.assign(module.exports, {CLIENTS, evalInContext, defineBots, startBots});
 const repl = require("./utils/replFunctions.js");
+const fs = require("fs");
