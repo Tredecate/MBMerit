@@ -1,20 +1,20 @@
 # MBMerit
 Private repository for the bot behind the MusicalBasics Discord Merit project
 
-### Requirements
+## Requirements
 - At least NodeJS v16
 
-### Installation
-Clone this repository and run the following inside the cloned directory:
+## Installation
+Clone this repository and run the following inside the cloned directory:  
 `npm install`
 
-### Running
-After NPM has installed the necessary modules, run the following inside the cloned directory:
+## Running
+After NPM has installed the necessary modules, run the following inside the cloned directory:  
 `npm start`
 
-### Config
-This app will grab some configuration values from `config.json`, located in the base project directory.
-The format for this file should match the following (without the comments):
+## Config
+This app will grab some configuration values from `config.json`, located in the base project directory.  
+The format for this file should match the following (without the comments):  
 ```json
 {
     "BOTS": {
@@ -32,13 +32,14 @@ The format for this file should match the following (without the comments):
 }
 ```
 
-### Discord Bot Token
-If this is being ran in the correct VM on the Google Cloud Project, this will be fetched and will use the token for Merit#7485.
+## Discord Bot Token
+If this is being ran in the correct VM on the Google Cloud Project, this will fetch and use the token for `Merit#7485`.  
 If this is being ran on a local machine, this will look for a `tokens.json` file in the base project directory. This is intended for testing.
 
-The format for this file should match the following:
+The format for this file should match the following:  
 ```json
 {
     "BotName": "XXXXXXXXXXXXXXXXXX.XXXXX.XXXXXXXXXXXXXXXXXXXX-XXXXX"
 }
-```
+```  
+This file has been excluded from git commits for security reasons.
