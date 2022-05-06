@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^13.6.0",
+    "events": "^3.3.0",
     "gcp-metadata": "^4.3.1"
   }
 }

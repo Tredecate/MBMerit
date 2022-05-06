@@ -1,5 +1,9 @@
-exports.run = (client, message) => {
+exports.run = (bot, message) => {
     message.channel.send("bong!").catch(console.error);
 }
 
-exports.name = "bong";
+exports.data = {
+
+    name: "bing"
+
+}
