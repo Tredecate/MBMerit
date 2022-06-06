@@ -1,6 +1,5 @@
 const { createInterface } = require("readline");
-const { inspect } = require("util");
-const { evalInContext, defineBots, startBots, bot } = require("../app.js");
+const { evalInContext, startBots, bot } = require("../app.js");
 
 
 //// PRIMARY EXPORTED HELPER FUNCTIONS ////

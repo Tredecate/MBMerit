@@ -1,9 +1,6 @@
-exports.run = (bot, message) => {
-    message.channel.send("bong!").catch(console.error);
-}
-
-exports.data = {
-
-    name: "bing"
-
-}
+module.exports = {
+    name: 'bing',
+    exec(message) {
+        message.channel.send('Bong!');
+    },
+};

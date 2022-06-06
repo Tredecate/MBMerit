@@ -1,17 +1,18 @@
-const { CLIENTS } = require("../app.js");
-
+const config = require("../config.json")
+const prefix = config.Merit.prefix;
 module.exports = (bot, message) => {
     // Ignore all bots
     if (message.author.bot) return;
 
-    if (message.content.indexOf(CLIENTS.Merit.config.prefix) !== 0) return;
+    // Ignore messages not starting with the prefix (in config.json)
+    if (message.content.indexOf(prefix) !== 0) return;
 
-    const args = message.content.slice(CLIENTS.Merit.config.prefix).trim().split(/ +/g);
+    // Our standard argument/command name definition.
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
     // Grab the command data from the client.commands Enmap
-   // const cmd = bot.commands.fetch(command);
-    const cmd = bot.commands.get
+    const cmd = bot.commands.get(command);
 
     // If that command doesn't exist, silently exit and do nothing
     if (!cmd) return;

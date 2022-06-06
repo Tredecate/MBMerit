@@ -1,36 +1,38 @@
 const { resolve } = require("path");
 const {  readdirSync, readFileSync } = require("fs");
-const { Discord, Collection, Client, Intents } = require("discord.js");
+const { Client, Intents, CommandInteraction} = require("discord.js");
+const Discord = require('discord.js');
 const {isAvailable, instance} = require("gcp-metadata");
 const {log} = require("./utils/replFunctions");
-
-
-
+const fs = require("fs");
 
 const bot = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
-    partials: ["CHANNEL"]
+    partials: ["CHANNEL", "MESSAGE"]
 });
 
-bot.commands = new Collection();
-const commandFiles = readdirSync('./commands').filter(file => file.endsWith('.js'));
-
+module.exports = bot;
 //// REGISTER COMMON EVENT HANDLERS AND PERFORM COMMON BOT STARTUP ROUTINE ////
-
+bot.commands = new Discord.Collection();
 
 async function startBots() {
 
     await bot.login(await getToken());
 
-    bot.on("ready", () => {
-        log(`Logged in as ${bot.user.tag}!`);
-    });
-
-    for (const file of commandFiles) {
-        const command = require(`./commands/${file}`);
-        bot.commands.set(command.data.name, command);
+    const commands = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+    for (const file of commands) {
+        let command = require(`./commands/${file}`);
+        await bot.commands.set(command.name, command);
+        console.log(`Command loaded: ${command.name}`);
     }
 
+    const eventFiles = fs.readdirSync("./events/").filter(file => file.endsWith(".js"));
+    for (const file of eventFiles) {
+        const eventName = file.split(".")[0];
+        let event = require(`./events/${file}`);
+
+        bot.on(eventName, () => event);
+    }
 
 }
 

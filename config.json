@@ -1,15 +1,14 @@
 {
-    "BOTS": {
         "Merit": {
             "name": "Merit",
+            "prefix": "!",
             "ids": {
                 "guild": "750575071726403615",
                 "levelChannel": "750575071726403618",
                 "meritChannel": "750575071726403618",
                 "logChannel": "750575071726403618",
                 "evalUsers": ["459180760377589760"]
-            },
-            "prefix": "*"
+            }
+
         }
-    }
 }
