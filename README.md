@@ -1,5 +1,5 @@
-# MBMerit
-Private repository for the bot behind the MusicalBasics Discord Merit project
+# MBMerit [Defunct]
+Repository for the bot behind the MusicalBasics Discord Merit project
 
 ## Requirements
 - At least NodeJS v16
